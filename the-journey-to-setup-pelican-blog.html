@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+        <title>The journey to setup Pelican blog</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">Zhijun Gao's Website <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+                <li><a href="/pages/about.html">About</a></li>
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/the-journey-to-setup-pelican-blog.html" rel="bookmark"
+                   title="Permalink to The journey to setup Pelican blog">The journey to setup Pelican blog</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2017-08-19T10:20:00+02:00">
+                Sat 19 August 2017
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/zhijun.html"> Zhijun</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <h1>The journey to set up personal blog with pelican</h1>
+<h2>Overview steps to develop blog with Pelican</h2>
+<ol>
+<li>Follow the official <a href="http://docs.getpelican.com/en/stable/quickstart.html">Quickstart</a> guide to finish the installation of Pelican</li>
+<li>Customize the Pelican blog with different themes</li>
+<li>Deploy the blog to github pages.</li>
+</ol>
+<h2>The installation of Pelican blog</h2>
+<p>You can follow the official guide to get the Pelican blog installed easily. Here are some sub-steps needed to add content and customize the theme.</p>
+<h3>Add content to Pelican website</h3>
+<ol>
+<li>Put the article written with Markdown or .rst into the folder of content</li>
+<li>The content should contain the necessary metadatas.</li>
+<li>Put the pages into the folder of <code>/content/pages</code></li>
+</ol>
+<h3>Install and customize the Pelican themes</h3>
+<ol>
+<li>Download the Pelican themes by this <a href="http://www.pelicanthemes.com">link</a></li>
+<li>Install the theme from Terminal, which will add the gum theme to Pelican</li>
+</ol>
+<div class="highlight"><pre><span></span>pelican-themes -i /Users/zhijungao/Downloads/pelican-themes-master/gum
+</pre></div>
+
+
+<ol>
+<li>Change the <code>sytle.css</code>file to make the theme more beautiful.</li>
+</ol>
+<p><u>Note: Check the installed themes:</u></p>
+<div class="highlight"><pre><span></span>$ pelican-themes -list
+gum
+notmyidea
+simple
+</pre></div>
+
+
+<h3>Generate content</h3>
+<ol>
+<li>
+<p>In Terminal, navigate to the quickstart fold. In my case, its path is <code>/Users/zhijungao/Documents/Personal/blog/Zhijun's Website</code></p>
+</li>
+<li>
+<p>Run code to generate content with settings and theme</p>
+</li>
+</ol>
+<p><code>code
+   pelican content -s pelicanconf.py -t gum</code></p>
+<ol>
+<li>Preview the website by navigate to <code>output</code> folder and run the followlling code:</li>
+</ol>
+<p><code>code
+   python3 -m pelican.server</code></p>
+<p>Till now the website is generated locally, the rest is to upload the files to github.</p>
+<h2>Deploy the blog to github pages</h2>
+<ol>
+<li>Create a repository with the name of "galty687.github.io"</li>
+<li>Upload all the files in the generated "output" folder to the <code>galty687.github.io</code>repository.</li>
+<li>Customize the URL of respository with gaozhijun.me</li>
+</ol>
+<p>Now, the blog is ready to be accessed.</p>
+<h2>Automation of the publishing process</h2>
+<p>Because github could only host static htmls. We could see from the above description that we need to regenerate all the content every time we have changes or new content.</p>
+<p>It's necessary to have all the generation process automated. In that case, I only need to focus on the writing itself. The following steps are to record the steps of automation.</p>
+<h2>Deploy blog to github pages</h2>
+<ol>
+<li>Clone the newly created repo</li>
+</ol>
+<p><code>code
+   git clone https://github.com/yourusername/galty687.github.io</code></p>
+<p>​</p>
+<ol>
+<li>Copy the generated output directory to the cloned repo</li>
+</ol>
+<p><code>code
+   cp -r /projects/blog/output* /galty687.github.io</code></p>
+<ol>
+<li>Add, commit and push all changes:</li>
+</ol>
+<p><code>code
+   git add --all
+   git commit -m "Initial commit"
+   git push -u origin master</code></p>
+<p>​</p>
+<p>Now you will have the blog deployed on github page.</p>
+<p><a href="http://igbt6.github.io/blog/how-to-setup-pelican-blog.html">Reference Information</a></p>
+<h2>Troubleshooting with the environment</h2>
+<h3>Git</h3>
+<p>To run git commands from Mac Terminal, I firstly install command line tools. </p>
+<p>The step is to run:</p>
+<div class="highlight"><pre><span></span>xcode-select --install
+</pre></div>
+
+
+<p>It takes some time to finish the installation.</p>
+<p>Without command tool, you will see the error message like the following:</p>
+<div class="highlight"><pre><span></span><span class="n">xcrun</span><span class="p">:</span> <span class="n">error</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">active</span> <span class="n">developer</span> <span class="n">path</span> <span class="p">(</span><span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Developer</span><span class="o">/</span><span class="n">CommandLineTools</span><span class="p">),</span> <span class="n">missing</span> <span class="n">xcrun</span> <span class="n">at</span><span class="p">:</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Developer</span><span class="o">/</span><span class="n">CommandLineTools</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">xcrun</span>
+</pre></div>
+
+
+<h3>Locale error</h3>
+<p>When I run the <code>pelican-quickstart</code>in Terminal, it prompts me with "<strong>ValueError: unknown locale: UTF-8</strong>". The solution to fix this is to change .bash file. The detailed solution could be found here:</p>
+<ol>
+<li>In the Finder, go to /Users/zhijungao</li>
+<li>Show Special Files</li>
+</ol>
+<p><img alt="showSpecialFiles" src="/Users/zhijungao/Desktop/showSpecialFiles.png"></p>
+<ol>
+<li>
+<p>Find the <code>.bash_profile</code> and edit it with Textedit.</p>
+</li>
+<li>
+<p>Add two lines of code to <code>.bash_profile</code></p>
+</li>
+</ol>
+<p><code>code
+   export LC_ALL="en_US.UTF-8"
+   export LANG="en_US.UTF-8"</code></p>
+<p>​</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+      <li><a href="/pages/about.html">About</a></li>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/develop.html">Develop</a></li>
+		<li><a href="/category/misc.html">Misc</a></li>
+		<li><a href="/category/phd.html">PhD</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+	<ul class="blank">
+</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://facebook.com/zhojun.gao">facebook</a></li>
+    <li><a href="https://www.linkedin.com/in/zhijungao/">Linkedin</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>
