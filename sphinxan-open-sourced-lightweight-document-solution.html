@@ -80,6 +80,7 @@
 <ol>
 <li>免费。因为是开源的，所以无需软件授权费用，非常适合开源项目或者中小型文档开发项目。另外还可以托管在Github Pages上，连托管费用都可以省去。</li>
 <li>输出格式丰富。除了输出位HTML （包括 HTML Help）外，还可以输出位PDF，ePUB等常见格式。</li>
+<li>非xml的结构化写作。Sphinx支持功能强大的reStructuredText，给写作人员新的选择。</li>
 <li>模板丰富。Sphinx有多个模板可用，而且可以用jinjia方便地开发自己的模板</li>
 <li>交叉引用方便。可以轻松设置交叉引用，还可以自动生成索引。</li>
 <li>方便扩展。因为是开源项目，有很多志愿者在不断开发和拓展项目</li>
@@ -92,7 +93,7 @@
 <li>发布文档</li>
 </ol>
 <h4>安装Sphinx</h4>
-<p>这里用pip来安装，对pip不熟悉，可以看这个文档</p>
+<p>这里用pip来安装，对pip不熟悉，可以看<a href="https://pip.pypa.io/en/stable/installing/">这个文档</a>。</p>
 <ol>
 <li>在 Mac Terminal中用pip安装</li>
 </ol>
@@ -177,7 +178,7 @@ True   True   True
 
 <h4>发布文档</h4>
 <p>首先在Mac Terminal中浏览至文档的根目录，本例中为 <code>Desktop/Sphinx-test</code></p>
-<div class="highlight"><pre><span></span><span class="err">$</span> <span class="n">sphinx</span><span class="o">-</span><span class="n">build</span> <span class="o">-</span><span class="n">b</span> <span class="n">html</span> <span class="n">sourcedir</span> <span class="n">builddir</span>
+<div class="highlight"><pre><span></span>$ sphinx-build -b html sourcedir builddir
 </pre></div>
 
 
