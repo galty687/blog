@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+        <title>Using chatbot in Wechat</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+              <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-45957014-3', '');
+                ga('send', 'pageview');
+
+              </script>
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">Zhijun Gao's Website <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+                <li><a href="/pages/about.html">About</a></li>
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/using-chatbot-in-wechat.html" rel="bookmark"
+                   title="Permalink to Using chatbot in Wechat">Using chatbot in Wechat</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2017-06-21T00:00:00+02:00">
+                Wed 21 June 2017
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/zhijun.html"> Zhijun</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <h1>机器人当班微信</h1>
+<p>因为想基于微信做一个问答系统，例如回答计算机辅助翻译专业考研问题等。于是探索了一下可能性。Python 有个开源聊天机器人，chatterbot，非常不错，训练也比较简单。为了和微信结合我又尝试了一个wxpy模块，试验过程记录如下。</p>
+<h2>wxpy</h2>
+<p>简介：基于itchat开发的可以控制微信网页端的模块。</p>
+<p>网站：http://wxpy.readthedocs.io/zh/latest/</p>
+<h3>登录微信</h3>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">wxpy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">bot</span><span class="o">=</span><span class="n">Bot</span><span class="p">()</span>
+
+<span class="n">etting</span> <span class="n">uuid</span> <span class="n">of</span> <span class="n">QR</span> <span class="n">code</span><span class="o">.</span>
+<span class="n">Downloading</span> <span class="n">QR</span> <span class="n">code</span><span class="o">.</span>
+<span class="n">Please</span> <span class="n">scan</span> <span class="n">the</span> <span class="n">QR</span> <span class="n">code</span> <span class="n">to</span> <span class="n">log</span> <span class="ow">in</span><span class="o">.</span>
+<span class="n">Please</span> <span class="n">press</span> <span class="n">confirm</span> <span class="n">on</span> <span class="n">your</span> <span class="n">phone</span><span class="o">.</span>
+<span class="n">Loading</span> <span class="n">the</span> <span class="n">contact</span><span class="p">,</span> <span class="n">this</span> <span class="n">may</span> <span class="n">take</span> <span class="n">a</span> <span class="n">little</span> <span class="k">while</span><span class="o">.</span>
+<span class="n">Login</span> <span class="n">successfully</span> <span class="k">as</span> <span class="err">高志军</span><span class="n">_pku</span>
+</pre></div>
+
+
+<h3>发送消息</h3>
+<div class="highlight"><pre><span></span><span class="c1"># 给机器人自己发送消息</span>
+<span class="n">bot</span><span class="o">.</span><span class="n">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;hello wechat&#39;</span><span class="p">)</span>
+<span class="c1"># 给文件助手发送消息</span>
+<span class="n">bot</span><span class="o">.</span><span class="n">file_helper</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;Hello World&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h3>指定聊天好友</h3>
+<div class="highlight"><pre><span></span><span class="c1"># 如需要将京燕设置为好友，则可查找后赋值</span>
+<span class="n">my_friend</span><span class="o">=</span><span class="n">bot</span><span class="o">.</span><span class="n">friends</span><span class="p">()</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;京燕&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+
+<h3>给好友发送消息</h3>
+<div class="highlight"><pre><span></span><span class="n">my_friend</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;Hello, WeChat!&#39;</span><span class="p">)</span>
+<span class="c1"># 发送图片</span>
+<span class="n">my_friend</span><span class="o">.</span><span class="n">send_image</span><span class="p">(</span><span class="s1">&#39;my_picture.png&#39;</span><span class="p">)</span>
+<span class="c1"># 发送视频</span>
+<span class="n">my_friend</span><span class="o">.</span><span class="n">send_video</span><span class="p">(</span><span class="s1">&#39;my_video.mov&#39;</span><span class="p">)</span>
+<span class="c1"># 发送文件</span>
+<span class="n">my_friend</span><span class="o">.</span><span class="n">send_file</span><span class="p">(</span><span class="s1">&#39;my_file.zip&#39;</span><span class="p">)</span>
+<span class="c1"># 以动态的方式发送图片</span>
+<span class="n">my_friend</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;@img@my_picture.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h3>自动回复好友消息</h3>
+<div class="highlight"><pre><span></span><span class="nd">@bot.register</span><span class="p">(</span><span class="n">my_friend</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">reply_my_friend</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">&#39;您的消息已收悉: {} ({})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+</pre></div>
+
+
+<h3>用聊天机器人自动回复</h3>
+<div class="highlight"><pre><span></span><span class="n">bot</span> <span class="o">=</span> <span class="n">Bot</span><span class="p">()</span>
+<span class="n">my_friend</span> <span class="o">=</span> <span class="n">ensure_one</span><span class="p">(</span><span class="n">bot</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;游否&#39;</span><span class="p">))</span>
+<span class="n">tuling</span> <span class="o">=</span> <span class="n">Tuling</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s1">&#39;你申请的 API KEY&#39;</span><span class="p">)</span>
+
+<span class="c1"># 使用图灵机器人自动与指定好友聊天</span>
+<span class="nd">@bot.register</span><span class="p">(</span><span class="n">my_friend</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">reply_my_friend</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="n">tuling</span><span class="o">.</span><span class="n">do_reply</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</pre></div>
+
+
+<h3>指定群组</h3>
+<div class="highlight"><pre><span></span><span class="c1">#搜索语言信息工程系，并将其指定</span>
+<span class="n">group</span><span class="o">=</span><span class="n">bot</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;工程系&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+
+<h3>指定群组有人at时自动回复</h3>
+<div class="highlight"><pre><span></span><span class="nd">@bot.register</span><span class="p">(</span><span class="n">Group</span><span class="p">,</span> <span class="n">TEXT</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">print_group_msg</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">is_at</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">reply</span><span class="p">(</span><span class="n">meg</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+
+
+<h3>指定群组有人at时机器人自动回复</h3>
+<div class="highlight"><pre><span></span><span class="nd">@bot.register</span><span class="p">(</span><span class="n">group4</span><span class="p">,</span> <span class="n">TEXT</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">print_group_msg</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">is_at</span><span class="p">:</span>
+        <span class="n">tuling</span><span class="o">.</span><span class="n">do_reply</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</pre></div>
+
+
+<h3>保持登陆/运行:</h3>
+<div class="highlight"><pre><span></span><span class="c1"># 进入 Python 命令行、让程序保持运行</span>
+<span class="n">embed</span><span class="p">()</span>
+
+<span class="c1"># 或者仅仅堵塞线程</span>
+<span class="c1"># bot.join()</span>
+</pre></div>
+
+
+<h3>完整代码</h3>
+<div class="highlight"><pre><span></span><span class="c1">#coding=&quot;utf-8&quot;</span>
+
+<span class="kn">from</span> <span class="nn">wxpy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">bot</span><span class="o">=</span><span class="n">Bot</span><span class="p">()</span>
+
+<span class="n">hjy</span><span class="o">=</span><span class="n">bot</span><span class="o">.</span><span class="n">friends</span><span class="p">()</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;京燕&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># 留言自动回复</span>
+<span class="nd">@bot.register</span><span class="p">(</span><span class="n">hjy</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">reply_my_friend</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">&#39;You messege is well received:{} ({})&#39;</span><span class="o">.</span><span class="n">format</span> <span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+<span class="c1"># 留言机器回复</span>
+<span class="nd">@bot.register</span><span class="p">(</span><span class="n">hjy</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">reply_my_friend</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="n">tuling</span><span class="o">.</span><span class="n">do_reply</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="c1"># 配置图灵机器人.tuling123.com</span>
+<span class="n">tuling</span> <span class="o">=</span> <span class="n">Tuling</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s1">&#39;ee47fb929e5647caa78b3aab8a2c0fe1&#39;</span><span class="p">)</span>
+
+<span class="c1">#指定语言信息工程系为group</span>
+<span class="n">group</span><span class="o">=</span><span class="n">bot</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;工程系&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1">#群组中at时自动机器人回复</span>
+<span class="nd">@bot.register</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">TEXT</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">print_group_msg</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">is_at</span><span class="p">:</span>
+        <span class="n">tuling</span><span class="o">.</span><span class="n">do_reply</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="n">embed</span><span class="p">()</span>
+</pre></div>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+      <li><a href="/pages/about.html">About</a></li>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/chinese-blogs.html">Chinese blogs</a></li>
+		<li><a href="/category/develop.html">Develop</a></li>
+		<li><a href="/category/misc.html">Misc</a></li>
+		<li><a href="/category/phd.html">PhD</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+	<ul class="blank">
+</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://weibo.com/cattutor">Weibo</a></li>
+    <li><a href="http://facebook.com/zhojun.gao">Facebook</a></li>
+    <li><a href="https://www.linkedin.com/in/zhijungao/">Linkedin</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>
