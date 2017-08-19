@@ -118,8 +118,16 @@ simple
 <p>Till now the website is generated locally, the rest is to upload the files to github.</p>
 <h2>Deploy the blog to github pages</h2>
 <ol>
-<li>Create a repository with the name of "galty687.github.io"</li>
-<li>Upload all the files in the generated "output" folder to the <code>galty687.github.io</code>repository.</li>
+<li>
+<p>Create a repository with the name of "galty687.github.io"</p>
+</li>
+<li>
+<p>Upload all the files in the generated "output" folder to the <code>galty687.github.io</code>repository.</p>
+</li>
+</ol>
+<p><code>unix
+   pelican content -o /Users/zhijungao/Documents/GitHub/galty687.github.io -s pelicanconf.py -t gum</code></p>
+<ol>
 <li>Customize the URL of respository with gaozhijun.me</li>
 </ol>
 <p>Now, the blog is ready to be accessed.</p>
@@ -132,7 +140,6 @@ simple
 </ol>
 <p><code>code
    git clone https://github.com/yourusername/galty687.github.io</code></p>
-<p>​</p>
 <ol>
 <li>Copy the generated output directory to the cloned repo</li>
 </ol>
@@ -145,7 +152,6 @@ simple
    git add --all
    git commit -m "Initial commit"
    git push -u origin master</code></p>
-<p>​</p>
 <p>Now you will have the blog deployed on github page.</p>
 <p><a href="http://igbt6.github.io/blog/how-to-setup-pelican-blog.html">Reference Information</a></p>
 <h2>Troubleshooting with the environment</h2>
@@ -196,6 +202,7 @@ simple
 
 <h4>Categories</h4>
 <ul class="blank">
+		<li><a href="/category/chinese-blogs.html">Chinese blogs</a></li>
 		<li><a href="/category/develop.html">Develop</a></li>
 		<li><a href="/category/misc.html">Misc</a></li>
 		<li><a href="/category/phd.html">PhD</a></li>
