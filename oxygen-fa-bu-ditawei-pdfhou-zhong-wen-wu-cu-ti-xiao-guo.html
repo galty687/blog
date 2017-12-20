@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+        <title>oXygen 发布DITA为PDF后中文无粗体效果</title>
+        <meta charset="utf-8" />
+
+
+        <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/theme/gumby.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/style.css" />
+        <link rel="stylesheet" type="text/css" href="/theme/pygment.css" />
+
+        <script src="/theme/js/libs/modernizr-2.6.2.min.js"></script>
+
+
+              <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-45957014-3', '');
+                ga('send', 'pageview');
+
+              </script>
+
+
+</head>
+
+<body id="index" class="home">
+
+
+    <div class="container">
+
+        <div class="row">
+
+          <header id="banner" class="body">
+                  <h1><a href="/">Zhijun Gao <strong></strong></a></h1>
+          </header><!-- /#banner -->
+
+            <div id="navigation" class="navbar row">
+              <a href="#" gumby-trigger="#navigation &gt; ul" class="toggle"><i class="icon-menu"></i></a>
+             
+              <ul class="columns">
+                <li><a href="/">Home</a></li>
+
+                <li><a href="/pages/about.html">About</a></li>
+
+              </ul>
+            </div>
+
+<section id="content" class="body">
+
+   <div class="row">
+        <div class="eleven columns">
+
+
+            <header>
+              <h2 class="entry-title">
+                <a href="/oxygen-fa-bu-ditawei-pdfhou-zhong-wen-wu-cu-ti-xiao-guo.html" rel="bookmark"
+                   title="Permalink to oXygen 发布DITA为PDF后中文无粗体效果">oXygen 发布DITA为PDF后中文无粗体效果</a></h2>
+           
+            </header>
+            <footer class="post-info">
+              <abbr class="published" title="2017-12-20T00:00:00+01:00">
+                Wed 20 December 2017
+              </abbr>
+              <address class="vcard author">By 
+                <a class="url fn" href="/author/zhijun-gao.html"> Zhijun Gao</a>
+              </address>
+            </footer><!-- /.post-info -->
+            <div class="entry-content">
+              <h1>oXygen 发布DITA为PDF后中文无粗体效果</h1>
+<h2>问题描述</h2>
+<p>中文dita里<code>/b</code>或<code>/i</code>标签，发布为pdf后，并无加粗或斜体效果。</p>
+<p>![CatchD647](/Users/zhijungao/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/0EB12868-E42A-435D-B4E9-31739062314D/CatchD647.jpg)</p>
+<h2>问题原因</h2>
+<ol>
+<li>英文的加粗实际上是通过字体来实现的，如Arial Normal, Arial Bold</li>
+<li>中文很多时候字体并没有bold效果，于是pdf无法生成粗体</li>
+</ol>
+<h2>解决方案</h2>
+<ol>
+<li>添加有粗体格式的字体（如微软雅黑，简宋等）</li>
+<li>在字符映射配置中，修改为此字体</li>
+</ol>
+<h2>如何修改字符映射具体步骤(oXygen Mac)</h2>
+<ol>
+<li>
+<p>依次找到<code>/Applications/Oxygen XML Editor/frameworks/dita/DITA-OT2.x/plugins/org.dita.pdf2/cfg</code></p>
+</li>
+<li>
+<p>用文本编辑工具打开<code>font-mappings.xml</code>文件</p>
+</li>
+<li>
+<p>在<code>&lt;physical-font char-set="Simplified Chinese"&gt;</code>这个代码段中添加Microsoft YaHei。</p>
+</li>
+</ol>
+<p><img alt="WechatIMG219" src="/Users/zhijungao/Desktop/WechatIMG219.jpeg"></p>
+<ol>
+<li>退出编辑文件，再选择Apache FOP渲染器进行发布即可成功。效果图如下：</li>
+</ol>
+<p>![Screen Shot 2017-12-20 at 14.07.57](/Users/zhijungao/Desktop/Screen Shot 2017-12-20 at 14.07.57.png)</p>
+<p>​</p>
+<h3>精细化调整字体设置（oXygen Mac）</h3>
+<ol>
+<li>
+<p>是否将字体嵌入到PDF文件中</p>
+</li>
+<li>
+<p>样式：normal | italic | oblique | backslant</p>
+</li>
+<li>
+<p>字号：normal | bold | 100 | 200 | 300 | 400| 500 | 600 | 700 | 800 | 900
+  (normal = 400, bold = 700)</p>
+</li>
+</ol>
+<h4>具体步骤</h4>
+<ol>
+<li>
+<p>依次找到<code>/Applications/Oxygen XML Editor/frameworks/dita/DITA-OT2.x/plugins/org.dita.pdf2.fop/fop</code></p>
+</li>
+<li>
+<p>在任意文本编辑器中，打开<code>fop.xcof</code>文件，在fonts代码段添加如下代码：</p>
+</li>
+</ol>
+<p><code>xml
+   &lt;font kerning="yes" embed-url="file:/D:\workspace\test-fonts\SimSun-Bold.ttf"&gt;
+     &lt;font-triplet name="SimSun" style="normal" weight="bold"/&gt;
+   &lt;/font&gt;</code>
+3.再选择 Apache FOP 发布即可。</p>
+            </div><!-- /.entry-content -->
+
+
+        </div><!-- /.eleven.columns -->
+
+<div class="three columns">
+
+<h4>Pages</h4>
+
+ <ul>
+      <li><a href="/pages/about.html">About</a></li>
+  </ul>
+
+<h4>Categories</h4>
+<ul class="blank">
+		<li><a href="/category/chinese-blog.html">Chinese blog</a></li>
+		<li><a href="/category/develop.html">Develop</a></li>
+		<li><a href="/category/misc.html">Misc</a></li>
+		<li><a href="/category/phd.html">PhD</a></li>
+</ul>
+
+
+<h4>Tags</h4>
+	<ul class="blank">
+</ul>
+
+
+<nav class="widget">
+  <h4>Social</h4>
+  <ul class="blank">
+    <li><a href="http://weibo.com/cattutor">Weibo</a></li>
+    <li><a href="http://facebook.com/zhojun.gao">Facebook</a></li>
+    <li><a href="https://www.linkedin.com/in/zhijungao/">Linkedin</a></li>
+  </ul>
+</nav>
+
+</div> </div><!-- /.row -->
+
+
+</section>
+
+       </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+       <div class="container.nopad bg">
+
+    
+        <footer id="credits" class="row">
+          <div class="seven columns left-center">
+
+                   <address id="about" class="vcard body">
+                    Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                    which takes great advantage of <a href="http://python.org">Python</a>.
+                    <br />
+                    Based on the <a target="_blank" href="http://gumbyframework.com">Gumby Framework</a>
+                    </address>
+          </div>
+
+
+          <div class="seven columns">
+            <div class="row">
+              <ul class="socbtns">
+
+
+
+
+
+              </ul>
+            </div>
+          </div>
+        </footer>
+
+    </div>
+
+
+  <script src="/theme/js/libs/jquery-1.9.1.min.js"></script>
+  <script src="/theme/js/libs/gumby.min.js"></script>
+  <script src="/theme/js/plugins.js"></script>
+</body>
+</html>
